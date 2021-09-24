@@ -1,0 +1,180 @@
+import math
+class Calculator:
+    def __init__(self):
+        self.first_num = 0
+        self.second_num = 0
+        self.operation = ""
+        self.result = 0
+        self.command = ""
+        self.results = 0
+        self.degree = 0
+        self.first2 = 0
+        self.sec2 = 0
+        self.operation2 = ""
+        self.result2 = 0
+
+    def calc_read2(self):
+        print(
+            "Какая из трех операций вам нужна (возвед. в степень - 1, деление с остатком - 2, нахождение корня - 3:  ")
+        self.operation = str(input())
+        print("Введите пеpвое число: ")
+        self.first2 = int(input())
+        print("Введите второе число: ")
+        self.sec2 = int(input())
+
+    def calc_extended2(self):
+        if self.operation2 == "1":
+            self.result2 = self.first2 * self.first2
+        elif self.operation2 == "2":
+            self.result2 = self.first2 ** 0.5
+        elif self.operation2 == "3":
+            while self.sec2 == 0:
+                print("Ошибка! Делитель не может быть равен быть нулю!")
+                print("Введите новое число не равное нулю!")
+                self.sec2 = int(input())
+            self.result2 = self.first2 % self.sec2
+
+    def calc_print2(self):
+        print(self.result2)
+
+    def calc_read3(self):
+        print("Введите номер команды от 1 до 3 (1 - sin, 2 - cos, 3 - tan, 4 - ctg) ")
+        self.command = int(input())
+        print("Введите угол в градусах: ")
+        self.degree = int(input())
+
+    def calc_print3(self):
+        print("Ответ: ")
+        print(round(self.results, 2))
+
+    def calc_degrees3(self):
+        rad = (self.degree * math.pi) / 180
+        if self.command == 1:
+            self.results = math.sin(rad)
+        elif self.command == 2:
+            self.results = math.cos(rad)
+        elif self.command == 3:
+            self.results = math.tan(rad)
+        elif self.command == 4:
+            self.results = math.cos(rad) / math.sin(rad)
+        else:
+            pass
+
+    def calc_read(self):
+        print("Введите первое число: ")
+        self.first_num = int(input())
+        print("Введите второе число: ")
+        self.second_num = int(input())
+        print("Введите операцию: ")
+        self.operation = str(input())
+
+    def calc_simple(self):
+        if self.operation == "*":
+            self.result = self.first_num * self.second_num
+        elif self.operation == "+":
+            self.result = self.first_num + self.second_num
+        elif self.operation == "-":
+            self.result = self.first_num - self.second_num
+        elif self.operation == "/":
+            while self.second_num == 0:
+                print("Ошибка! Делитель не может быть равен нулю!")
+                print("Введите новое число не равное нулю")
+                self.second_num = int(input())
+            self.result = self.first_num / self.second_num
+
+    def calc_print(self):
+        print(self.result)
+
+    def cal_10_2(self):
+        print("Введите число: ")
+        self.num = int(input())
+        self.num = str(bin(self.num))
+        return self.num[2:]
+
+    def cal_10_8(self):
+        print("Введите число: ")
+        self.num = int(input())
+        self.num = str(oct(self.num))
+        return self.num[2:]
+
+    def cal_10_16(self):
+        print("Введите число: ")
+        self.num = int(input())
+        self.num = str(hex(self.num))
+        return self.num[2:]
+
+    def menu_notation(self):
+        print("1. Перевод 10СИ --> 2СИ;")
+        print("2. Перевод 10СИ --> 8СИ;")
+        print("3. Перевод 10СИ --> 16СИ;")
+        self.num = int(input())
+        calc = Calculator()
+        if self.num == 1:
+            print(calc.cal_10_2())
+        elif self.num == 2:
+            print(calc.cal_10_8())
+        elif self.num == 3:
+            print(calc.cal_10_16())
+
+    def str_simple(self):
+        print("Введите действие (+ или *)")
+        self.stroka = str(input())
+        if self.stroka == "+":
+            print("Введите 2 строки")
+            self.strr1, self.strr2 = map(str, input().split())
+            print(self.strr1 + self.strr2)
+        elif self.stroka == "*":
+            print("Введите строку и число")
+            self.strr1, self.strr2 = map(str, input().split())
+            print(self.strr1 * int(self.strr2))
+
+    def menu_strings(self):
+        print("1. Простые операции со строками ")
+        print("2. Вывод строки по центру экрана ")
+        self.num = int(input())
+        calc = Calculator()
+        if self.num == 1:
+             calc.str_simple()
+        elif self.num == 2:
+             pass
+
+    def menu_numbers(self):
+        print("1. Простые операции")
+        print("2. Расширенные операции")
+        print("3. Тригонометрические действия с градусами")
+        print("6. Перевод чисел в различные СС")
+        calc = Calculator()
+        self.num = int(input())
+        if self.num == 1:
+            calc.calc_read()
+            calc.calc_simple()
+            calc.calc_print()
+        elif self.num == 2:
+            calc.calc_read2()
+            calc.calc_extended2()
+            calc.calc_print2()
+
+        elif self.num == 3:
+            calc.calc_read3()
+            calc.calc_degrees3()
+            calc.calc_print3()
+            print()
+        elif self.num == 6:
+            calc.menu_notation()
+    def menu(self):
+        print("1. Калькулятор чисел")
+        print("2. Калькулятор строк")
+        self.num = int(input())
+        calc = Calculator()
+        if self.num == 1:
+            calc.menu_numbers()
+        elif self.num == 2:
+            calc.menu_strings()
+
+
+def main():
+    calculator228 = Calculator()
+    calculator228.menu()
+
+if __name__ == "__main__":
+    main()
